@@ -8,7 +8,7 @@ use App\models\ListItem;
 class TodoListController extends Controller
 {
     public function index() {
-        return view('welcome', ['listItems' => ListItem::where('is_complete', 0)->get()]);  
+        return view('welcome', ['listItems' => ListItem::where('is_complete', 0)->limit(5)->get()], ['completeList' => ListItem::where('is_complete', 1)->latest()->limit(10)->get()]);  
     }
 
     public function markComplete($id) {

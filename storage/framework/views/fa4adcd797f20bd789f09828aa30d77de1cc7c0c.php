@@ -19,31 +19,55 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+
+            .col .bg-white {
+                height: 100%;
+                border-radius: 0 25px;
+            }
+
+            .col .bg-white ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
         </style>
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <div style="color: white;">   
-                <h1>ToDo List App</h1>
-                <ul>
-                <?php $__currentLoopData = $listItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <form method="post" action="<?php echo e(route('markComplete', $listItem->id)); ?>" accept-charset="UTF-8" class="d-flex gap-2 mt-1">
-                    <?php echo e(csrf_field()); ?>
+            <div class="row">
+                <div class="col" style="width: 700px;">
+                    <div style="color: white;">   
+                        <h1>ToDo List App</h1>
+                        <ul>
+                        <?php $__currentLoopData = $listItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <form method="post" action="<?php echo e(route('markComplete', $listItem->id)); ?>" accept-charset="UTF-8" class="d-flex gap-2 mt-1">
+                            <?php echo e(csrf_field()); ?>
 
-                    <li>Item: <?php echo e($listItem->name); ?></li>
-                    <button type="submit" class="btn btn-outline-secondary btn-sm text-light">Mark Complete</button>
+                            <li>Item: <?php echo e($listItem->name); ?></li>
+                            <button type="submit" class="btn btn-outline-secondary btn-sm text-light">Mark Complete</button>
 
-                </form method="post" action="">
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </ul>
-                <form method="post" action="<?php echo e(route('saveItem')); ?>" accept-charset="UTF-8">
-                    <?php echo e(csrf_field()); ?>
+                        </form method="post" action="">
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </ul>
+                        <form method="post" action="<?php echo e(route('saveItem')); ?>" accept-charset="UTF-8">
+                            <?php echo e(csrf_field()); ?>
 
 
-                    <label for="listItem" class="form-label">New ToDo Item</label>
-                    <input type="text" class="form-control" name="listItem" list="datalistOptions" id="listItem" placeholder="Type here...">
-                    <button type="submit" class="btn btn-primary btn-lg mt-3">Save Item</button>
-                </form>
+                            <label for="listItem" class="form-label">New ToDo Item</label>
+                            <input type="text" class="form-control" name="listItem" list="datalistOptions" id="listItem" placeholder="Type here...">
+                            <button type="submit" class="btn btn-primary btn-lg mt-3">Save Item</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="bg-white text-center p-5">
+                        <ul>
+                            <?php $__currentLoopData = $completeList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li class="text-decoration-line-through"><?php echo e($item->name); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
